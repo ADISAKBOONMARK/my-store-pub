@@ -1,4 +1,5 @@
 # Consensus
+
 Consensus, in the context of blockchain technology, refers to the process by which all nodes in a decentralized network agree on the validity of transactions and the order in which they are added to the blockchain. Consensus mechanisms are essential for ensuring that the blockchain is secure and immutable.
 
 ## Proof of Work (PoW):
@@ -96,6 +97,57 @@ In this diagram:
 - Authority nodes propose blocks within a certain time frame.
 - If consensus is reached, the proposed block is added to the blockchain.
 
+## Proof of Staked Authority (PoSA):
+
+Proof of Staked Authority is a consensus mechanism that combines elements of Proof of Stake (PoS) and Proof of Authority (PoA). In PoSA, validators are selected based on the amount of cryptocurrency they hold (staking) and their reputation or authority in the network. These validators are responsible for creating new blocks and validating transactions. PoSA aims to achieve a balance between decentralization and efficiency, as validators are incentivized to act honestly through staking but are also held accountable for their actions.
+
+```mermaid
+graph LR
+    A[Stakeholder] --> B(Stake Tokens);
+    B --> C{Selected as Validator?};
+    C -->|Yes| D(Validate Transactions);
+    C -->|No| B;
+    D --> E{Block Creation Time?};
+    E -->|Within Time| F(Propose Block);
+    E -->|Not Within Time| G(Continue Validating);
+    F --> H{Consensus Reached?};
+    H -->|Yes| I(Add Block to Chain);
+    H -->|No| G;
+
+```
+
+In this diagram:
+
+- Stakeholders stake their tokens to become eligible for block validation.
+- Validators are selected based on their stake to validate transactions.
+- Validators propose blocks within a certain time frame.
+- If consensus is reached, the proposed block is added to the blockchain.
+
+## Proof of History (PoH):
+
+PoH is a cryptographic clock that provides a way to order transactions efficiently. It helps Solana nodes agree on the time order of events without having to wait for network latency or processing delays. This allows for high throughput and fast confirmation times.
+
+```mermaid
+graph LR
+    A[Validator] --> B(Generate Proof of History);
+    B --> C{Proof of History Valid?};
+    C -->|Yes| D(Validate Transactions);
+    C -->|No| B;
+    D --> E{Block Creation Time?};
+    E -->|Within Time| F(Propose Block);
+    E -->|Not Within Time| D;
+    F --> G{Consensus Reached?};
+    G -->|Yes| H(Add Block to Chain);
+    G -->|No| D;
+
+```
+
+In this diagram:
+
+- Validators generate a proof of history, which is a cryptographic proof of the order of transactions.
+- Validators use the proof of history to validate transactions and propose blocks.
+- If consensus is reached, the proposed block is added to the blockchain.
+
 ## Proof of Burn (PoB):
 
 PoB involves burning, or destroying, cryptocurrency tokens to earn the right to mine or validate blocks. This is used as a way to reduce the total supply of a cryptocurrency.
@@ -183,54 +235,3 @@ In this diagram:
 - Participants generate a random wait time and wait until it elapses.
 - Those who have completed the wait time are allowed to mine or validate transactions.
 - Successful mining or validation results in rewards for the participant.
-
-## Proof of History (PoH):
-
-PoH is a cryptographic clock that provides a way to order transactions efficiently. It helps Solana nodes agree on the time order of events without having to wait for network latency or processing delays. This allows for high throughput and fast confirmation times.
-
-```mermaid
-graph LR
-    A[Validator] --> B(Generate Proof of History);
-    B --> C{Proof of History Valid?};
-    C -->|Yes| D(Validate Transactions);
-    C -->|No| B;
-    D --> E{Block Creation Time?};
-    E -->|Within Time| F(Propose Block);
-    E -->|Not Within Time| D;
-    F --> G{Consensus Reached?};
-    G -->|Yes| H(Add Block to Chain);
-    G -->|No| D;
-
-```
-
-In this diagram:
-
-- Validators generate a proof of history, which is a cryptographic proof of the order of transactions.
-- Validators use the proof of history to validate transactions and propose blocks.
-- If consensus is reached, the proposed block is added to the blockchain.
-
-## Proof of Staked Authority (PoSA):
-
-Proof of Staked Authority is a consensus mechanism that combines elements of Proof of Stake (PoS) and Proof of Authority (PoA). In PoSA, validators are selected based on the amount of cryptocurrency they hold (staking) and their reputation or authority in the network. These validators are responsible for creating new blocks and validating transactions. PoSA aims to achieve a balance between decentralization and efficiency, as validators are incentivized to act honestly through staking but are also held accountable for their actions.
-
-```mermaid
-graph LR
-    A[Stakeholder] --> B(Stake Tokens);
-    B --> C{Selected as Validator?};
-    C -->|Yes| D(Validate Transactions);
-    C -->|No| B;
-    D --> E{Block Creation Time?};
-    E -->|Within Time| F(Propose Block);
-    E -->|Not Within Time| G(Continue Validating);
-    F --> H{Consensus Reached?};
-    H -->|Yes| I(Add Block to Chain);
-    H -->|No| G;
-
-```
-
-In this diagram:
-
-- Stakeholders stake their tokens to become eligible for block validation.
-- Validators are selected based on their stake to validate transactions.
-- Validators propose blocks within a certain time frame.
-- If consensus is reached, the proposed block is added to the blockchain.
